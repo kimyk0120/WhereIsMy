@@ -221,7 +221,11 @@ public class GameController : MonoBehaviour
 
     void update_game_point(int game_point)
     {
-        game_report.text = "찾은 간식 : " + game_point;
+        String text = "";
+        if (game_no == 1) text = "간식";
+        else if (game_no == 2) text = "꽃";
+        else if (game_no == 3) text = "모자";
+        game_report.text = "찾은 "+text+" : " + game_point;
     }
 
     public void StartShuffle()
