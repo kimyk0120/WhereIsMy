@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - ConfigToggleBtn
+  - CardImage
+  - CharacterImage
+  - BlockImage
   layers:
   - Default
   - TransparentFX

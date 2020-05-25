@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class Globals : MonoBehaviour
 {
-   public static int game_no = 0;
-   public static int game_time_sec = 60;
-   public static int game_difficult = 1;
-   public static int game_player = 1;
+   
+   public static int game_no = 1; //선택 게임 번호 1:똘똘이의 간식찾기, 2:이쁜이의 꽃찾기, 3:이장님의 모자찾기 
+   public static int game_time_sec = 60; // 사용자 설정 - 게임 total 시간
+   public static int game_difficult = 1; // 사용자 설정 - 게임 난이도 
+   public static int game_player = 1; // 사용자 설정 - 사용자 숫자 
    
    private void Awake()
    {
