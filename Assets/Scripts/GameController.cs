@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     private Sprite tempSP; // shuffle temp
     private GameObject tempGO; // shuffle temp
     private int game_point = 0;
+    private int per_game_point = 0;
     public Text game_report;
     private int game_step = 0; // 0: 초기화 , 1: 게임시작 (간식의 위치 기억), 
     private int game_difficult = 1; // 사용자 게임 난이도  
@@ -46,6 +47,8 @@ public class GameController : MonoBehaviour
     private int click_count_max = 2;
 
     private bool block_image_stat = false;
+
+    private GameObject[] cards;
     
     private void Awake()
     {
@@ -73,10 +76,11 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(3.0f);
         init_card_stat_text(game_no);
-        block_image_active(true);  // 수정 필요 
+        set_card_image_alpha_all(0.0f);
+        block_image_active(true);  
         yield return new WaitForSeconds(1.0f);
         // shuffle animation
-        GameObject[] cards = GameObject.FindGameObjectsWithTag("CardImage");
+        cards = GameObject.FindGameObjectsWithTag("CardImage");
         co = StartCoroutine(ShuffleAnim(cards , shuffle_count));    
     }
     
@@ -113,7 +117,7 @@ public class GameController : MonoBehaviour
             }    
         }
         update_card_stat_text();
-        // block_image_stat = true;
+        block_image_stat = true;
         StopCoroutine(co);
         StartCoroutine(STEP);
     }
@@ -126,6 +130,25 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void set_card_image_alpha_all(float alpha)
+    {
+        cards = GameObject.FindGameObjectsWithTag("CardImage");
+        for (int i = 0; i < cards.Length; i++)
+        {
+            Color a = cards[i].GetComponent<Image>().color;
+            a.a = alpha;
+            cards[i].GetComponent<Image>().color = a;
+        }
+    }
+    
+    private void set_card_image_alpha(GameObject obj, float alpha)
+    {
+        Color a = obj.GetComponent<Image>().color;
+        a.a = alpha;
+        obj.GetComponent<Image>().color = a;
+    }
+    
+    
     void update_card_stat_text()
     {
         String text = "";
@@ -134,7 +157,17 @@ public class GameController : MonoBehaviour
         else if (game_no == 3) text = "모자";
         CardStatText.text = text + "은 어디에 있을까요?";
     }
+
+    void show_car_stat_point(int per_game_point)
+    {
+        String text = "";
+        if (game_no == 1) text = "간식";
+        else if (game_no == 2) text = "꽃";
+        else if (game_no == 3) text = "모자";
+        CardStatText.text = per_game_point + "개의 "+text+"를 찾았습니다!";
+    }
     
+
     void init_main_character_image(int game_no)
     {
         for (int i = 0; i < main_charater_image_array.Length; i++)
@@ -152,7 +185,8 @@ public class GameController : MonoBehaviour
         if (game_no == 1) text = "간식";
         else if (game_no == 2) text = "꽃";
         else if (game_no == 3) text = "모자";
-        CardStatText.text = text + " 위치를 기억하세요."; 
+        CardStatText.text = text + " 위치를 기억하세요!";
+            
     }
 
     void init_game_card_images(int game_no)
@@ -204,22 +238,24 @@ public class GameController : MonoBehaviour
     // 블록 이미지 선택 
     public void click_block_image(GameObject obj)
     {
-        // if (block_image_stat)
-        // {
+        if (block_image_stat)
+        {
+            set_card_image_alpha(obj.transform.parent.gameObject, 255.0f);
             obj.SetActive(false);
             set_game_point(obj);
             set_click_count();    
-        // }
+        }
     }
 
     // 게임 포인트 취합
     private void set_game_point(GameObject obj)
     {
-        string ans = "b";
+        string ans = "o";
         if (obj.transform.parent.GetComponent<Image>().sprite.name.Contains(ans))
         {
             print(obj.transform.parent.GetComponent<Image>().sprite.name);
             this.game_point++;
+            per_game_point++;
             update_game_point(this.game_point);
         }
     }
@@ -230,21 +266,25 @@ public class GameController : MonoBehaviour
         click_count++;
         if (click_count == click_count_max)
         {
+            show_car_stat_point(per_game_point);
+            per_game_point = 0;
+            set_card_image_alpha_all(255.0f);
             block_image_active(false);
+            block_image_stat = false;
             STEP = CO_STEP();
             StartCoroutine(STEP);
             click_count = 0;
-            // block_image_stat = false;
         }    
     }
     
     // 게임 종료 
     public void finish_game()
     {
+        set_card_image_alpha_all(255.0f);
         block_image_active(false);
         CardStatText.text = "게임이 종료되었습니다.";
         StopCoroutine(co);
-        StartCoroutine(STEP);
+        StopCoroutine(STEP);
     }
 
     // 게임 재시작
