@@ -44,6 +44,8 @@ public class GameController : MonoBehaviour
     private bool block_image_stat = false;
 
     private GameObject[] cards;
+
+    public ProgressBar progressBar;
     
     private void Awake()
     {
@@ -98,20 +100,17 @@ public class GameController : MonoBehaviour
             RectTransform rt2 = cards[rnd2].GetComponent<RectTransform>();
             Vector2 targetPos2 = cards[rnd].GetComponent<RectTransform>().localPosition;
             float step = 0;
-            float delay = 0.09f;
-            while (step < 0.7f)
+            float delay = 0.1f;
+            while (step < 0.5f)
             {
                 // print(step);
-                // rt.offsetMin = Vector2.Lerp(rt.offsetMin, targetPos, step += Time.deltaTime * delay);
-                // rt.offsetMax = Vector2.Lerp(rt.offsetMax, targetPos, step += Time.deltaTime * delay);
-                // rt2.offsetMin = Vector2.Lerp(rt2.offsetMin, targetPos2, step += Time.deltaTime * delay);
-                // rt2.offsetMax = Vector2.Lerp(rt2.offsetMax, targetPos2, step += Time.deltaTime * delay);
                 rt.localPosition = Vector2.Lerp(rt.localPosition, targetPos, step += Time.deltaTime * delay);
                 rt2.localPosition = Vector2.Lerp(rt2.localPosition, targetPos2, step += Time.deltaTime * delay);
                 yield return new WaitForEndOfFrame();
             }    
         }
         update_card_stat_text();
+        //progressBar.StartCountTime();   
         block_image_stat = true;
         StopCoroutine(co);
         StartCoroutine(STEP);
@@ -159,7 +158,7 @@ public class GameController : MonoBehaviour
         if (game_no == 1) text = "간식";
         else if (game_no == 2) text = "꽃";
         else if (game_no == 3) text = "모자";
-        CardStatText.text = per_game_point + "개의 "+text+"를 찾았습니다!";
+        CardStatText.text = per_game_point + "개의 "+text+"을(를) 찾았습니다!";
     }
     
 
@@ -225,7 +224,7 @@ public class GameController : MonoBehaviour
         if (game_no == 1) text = "간식";
         else if (game_no == 2) text = "꽃";
         else if (game_no == 3) text = "모자";
-        game_report.text = "찾은 "+text+" : " + game_point;
+        game_report.text = "찾은 "+text+" : " + game_point + "개";
     }
 
     public void StartShuffle()
@@ -265,6 +264,7 @@ public class GameController : MonoBehaviour
         click_count++;
         if (click_count == click_count_max)
         {
+            // progressBar.StopCountTime();
             show_car_stat_point(per_game_point);
             per_game_point = 0;
             set_card_image_alpha_all(255.0f);

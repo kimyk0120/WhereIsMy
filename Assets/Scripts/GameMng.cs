@@ -6,7 +6,12 @@ using UnityEngine.UI;
 
 public class GameMng : MonoBehaviour
 {
-    
+    // private void Awake()
+    // {
+        // Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        // Screen.SetResolution(1024, 768, true);
+    // }
+
     public void SetGameNo(int gm_no)
     {
         Globals.game_no = gm_no;

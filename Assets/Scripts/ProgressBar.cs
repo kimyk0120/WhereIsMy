@@ -18,13 +18,13 @@ public class ProgressBar : MonoBehaviour
      private void Awake()
     {
         slider = gameObject.GetComponent<Slider>();
+        co = ProgressCount();
     }
 
     private void Start()
     {
         
         slider.maxValue = slider_max_val = Globals.game_time_sec;
-        co = ProgressCount();
         StartCoroutine(co);
     }
     
