@@ -939,7 +939,7 @@ ScriptsOnlyBuild:
     className: TMPro_InstructionOverlay
   - hash:
       serializedVersion: 2
-      Hash: 88b45e3e205bd316b2951f0221f61842
+      Hash: d73f4b131b7dff2abeb589b867c239ba
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ProgressBar
@@ -1070,4 +1070,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/3_MCI_game_config.unity
   - Assets/Scenes/4_MCI_game_main.unity
   - Assets/Scenes/4_MCI_game_main_2p.unity
-  playerPath: /Users/youngkwangkim/Downloads/test.app
+  playerPath: /Users/youngkwangkim/Downloads/mci/mac/mci.app
