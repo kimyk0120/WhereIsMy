@@ -582,7 +582,7 @@ GameObject:
   - component: {fileID: 340208157}
   m_Layer: 5
   m_Name: CardPanel
-  m_TagString: Untagged
+  m_TagString: CardPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -686,6 +686,10 @@ MonoBehaviour:
   - {fileID: 97490031}
   - {fileID: 873937310}
   - {fileID: 1408688436}
+  cards:
+  - {fileID: 541999528}
+  - {fileID: 366687969}
+  - {fileID: 268665511}
   progressBar: {fileID: 2027614150}
 --- !u!1 &366687969
 GameObject:
@@ -2838,5 +2842,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d563264e8ce3b49c0a700fded479a24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game_controller: {fileID: 340208157}
   rest_time_text: {fileID: 1061181025}

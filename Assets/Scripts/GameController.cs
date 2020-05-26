@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour
 
     private bool block_image_stat = false;
 
-    private GameObject[] cards;
+    public GameObject[] cards;
 
     public ProgressBar progressBar;
     
@@ -77,7 +77,7 @@ public class GameController : MonoBehaviour
         block_image_active(true);  
         yield return new WaitForSeconds(1.0f);
         // shuffle animation
-        cards = GameObject.FindGameObjectsWithTag("CardImage");
+        //cards = GameObject.FindGameObjectsWithTag("CardImage");
         co = StartCoroutine(ShuffleAnim(cards , shuffle_count));    
     }
     
@@ -126,7 +126,7 @@ public class GameController : MonoBehaviour
 
     private void set_card_image_alpha_all(float alpha)
     {
-        cards = GameObject.FindGameObjectsWithTag("CardImage");
+        //cards = GameObject.FindGameObjectsWithTag("CardImage");
         for (int i = 0; i < cards.Length; i++)
         {
             Color a = cards[i].GetComponent<Image>().color;
@@ -229,7 +229,7 @@ public class GameController : MonoBehaviour
 
     public void StartShuffle()
     {
-        GameObject[] cards = GameObject.FindGameObjectsWithTag("CardImage");
+        //GameObject[] cards = GameObject.FindGameObjectsWithTag("CardImage");
         co = StartCoroutine(ShuffleAnim(cards , shuffle_count));    
     }
 

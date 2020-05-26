@@ -11,4 +11,16 @@ public class SceneMng : MonoBehaviour
     {
         SceneManager.LoadScene(num);
     }
+
+    public void go_to_main_scene()
+    {
+        if (Globals.game_player == 2)
+        {
+            SceneManager.LoadScene(4);
+        }
+        else
+        {
+            SceneManager.LoadScene(3);
+        }
+    }
 }

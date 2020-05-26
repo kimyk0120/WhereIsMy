@@ -11,9 +11,10 @@ public class ProgressBar : MonoBehaviour
     private float progressTime = 0;
     private Coroutine _coroutine;
     private IEnumerator co;
-    public GameController game_controller;
+    private List<GameController> game_controller;
     public Text rest_time_text;
     private float rest_time;
+    private GameObject[] objs;
     
      private void Awake()
     {
@@ -23,7 +24,7 @@ public class ProgressBar : MonoBehaviour
 
     private void Start()
     {
-        
+        objs = GameObject.FindGameObjectsWithTag("CardPanel");
         slider.maxValue = slider_max_val = Globals.game_time_sec;
         StartCoroutine(co);
     }
@@ -42,7 +43,10 @@ public class ProgressBar : MonoBehaviour
             {
                 print("count end");
                 StopCoroutine(co);
-                game_controller.finish_game(); // 게임 종료 
+                for (int i = 0; i < objs.Length; i++)
+                {
+                    objs[i].GetComponent<GameController>().finish_game(); // 게임 종료
+                }
                 set_rest_time_text(0.0f);
             }
         }
@@ -60,7 +64,7 @@ public class ProgressBar : MonoBehaviour
     
     private void set_rest_time_text(float restTime)
     {
-        rest_time_text.text = "남은시간 " + string.Format("{0:F2}", restTime);
+        rest_time_text.text = "남은시간 " + string.Format("{0:F1}", restTime);
     }
 
 }//.class

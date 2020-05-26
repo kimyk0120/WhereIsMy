@@ -8,6 +8,7 @@ TagManager:
   - CardImage
   - CharacterImage
   - BlockImage
+  - CardPanel
   layers:
   - Default
   - TransparentFX
