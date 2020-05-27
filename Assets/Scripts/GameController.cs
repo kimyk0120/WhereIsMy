@@ -63,6 +63,7 @@ public class GameController : MonoBehaviour
         init_card_stat_text(game_no);
         init_main_character_image(game_no);
         init_game_card_images(game_no);
+        set_card_image_alpha_all(0.0f);
         update_game_point(game_point);
         STEP = CO_STEP();
         StartCoroutine(STEP);
@@ -73,6 +74,7 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(3.0f);
         card_shuffle_ones(cards);
+        set_card_image_alpha_all(255.0f);
         init_card_stat_text(game_no);
         yield return new WaitForSeconds(3.0f);
         set_card_image_alpha_all(0.0f);
