@@ -46,6 +46,8 @@ public class GameController : MonoBehaviour
     public GameObject[] cards;
 
     public ProgressBar progressBar;
+
+    private int co_count = 0;
     
     private void Awake()
     {
@@ -63,7 +65,6 @@ public class GameController : MonoBehaviour
         init_card_stat_text(game_no);
         init_main_character_image(game_no);
         init_game_card_images(game_no);
-        set_card_image_alpha_all(0.0f);
         update_game_point(game_point);
         STEP = CO_STEP();
         StartCoroutine(STEP);
@@ -73,8 +74,7 @@ public class GameController : MonoBehaviour
     IEnumerator CO_STEP()
     {
         yield return new WaitForSeconds(3.0f);
-        card_shuffle_ones(cards);
-        set_card_image_alpha_all(255.0f);
+        if(co_count >= 1) card_shuffle_ones(cards);
         init_card_stat_text(game_no);
         yield return new WaitForSeconds(3.0f);
         set_card_image_alpha_all(0.0f);
@@ -116,13 +116,14 @@ public class GameController : MonoBehaviour
         update_card_stat_text();
         //progressBar.StartCountTime();   
         block_image_stat = true;
+        co_count++;
         StopCoroutine(co);
         StartCoroutine(STEP);
     }
     
     private void card_shuffle_ones(GameObject[] card)
     {
-        print("test");
+        //print("test");
         int rnd;
         int rnd2;
         while (true)

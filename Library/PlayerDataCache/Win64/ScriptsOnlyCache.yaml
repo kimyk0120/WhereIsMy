@@ -1070,4 +1070,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/3_MCI_game_config.unity
   - Assets/Scenes/4_MCI_game_main.unity
   - Assets/Scenes/4_MCI_game_main_2p.unity
-  playerPath: /Users/youngkwangkim/Downloads/mci/win/mci20200527_2/MCI_proto.exe
+  playerPath: /Users/youngkwangkim/Downloads/mci_3/win/mci/MCI_proto.exe

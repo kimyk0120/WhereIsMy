@@ -1070,4 +1070,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/3_MCI_game_config.unity
   - Assets/Scenes/4_MCI_game_main.unity
   - Assets/Scenes/4_MCI_game_main_2p.unity
-  playerPath: /Users/youngkwangkim/Downloads/mci/mac/mci20200527.app
+  playerPath: /Users/youngkwangkim/Downloads/mci_3/mac/mci.app
