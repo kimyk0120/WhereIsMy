@@ -72,7 +72,9 @@ public class GameController : MonoBehaviour
     IEnumerator CO_STEP()
     {
         yield return new WaitForSeconds(3.0f);
+        card_shuffle_ones(cards);
         init_card_stat_text(game_no);
+        yield return new WaitForSeconds(3.0f);
         set_card_image_alpha_all(0.0f);
         block_image_active(true);  
         yield return new WaitForSeconds(1.0f);
@@ -114,6 +116,25 @@ public class GameController : MonoBehaviour
         block_image_stat = true;
         StopCoroutine(co);
         StartCoroutine(STEP);
+    }
+    
+    private void card_shuffle_ones(GameObject[] card)
+    {
+        print("test");
+        int rnd;
+        int rnd2;
+        while (true)
+        {
+            rnd= Random.Range(0, cards.Length);
+            rnd2= Random.Range(0, cards.Length);
+            if(rnd != rnd2) break;
+        }
+        RectTransform rt = cards[rnd].GetComponent<RectTransform>();
+        Vector2 targetPos = cards[rnd2].GetComponent<RectTransform>().localPosition;
+        RectTransform rt2 = cards[rnd2].GetComponent<RectTransform>();
+        Vector2 targetPos2 = cards[rnd].GetComponent<RectTransform>().localPosition;
+        rt.localPosition = targetPos;
+        rt2.localPosition = targetPos2;
     }
     
     public void block_image_active(bool set)

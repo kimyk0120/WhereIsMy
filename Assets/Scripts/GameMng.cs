@@ -35,4 +35,13 @@ public class GameMng : MonoBehaviour
     public void printGlobals(){
         Globals.print_globals();
     }
+
+    public void init_globasl()
+    {
+        Globals.game_no = 1;
+        Globals.game_time_sec = 60;
+        Globals.game_difficult = 1;
+        Globals.game_player = 1;
+    }
+    
 }
