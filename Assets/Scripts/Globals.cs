@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
+using Random = System.Random;
 
+[SuppressMessage("ReSharper", "InconsistentNaming")]
 public class Globals : MonoBehaviour
 {
    

@@ -51,7 +51,7 @@ public class GameController : MonoBehaviour
     
     private void Awake()
     {
-        game_no = Globals.game_no;
+        game_no = Random.Range(1,4);
         game_difficult = Globals.game_difficult;
     }
 
