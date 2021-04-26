@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,8 @@ public class ProgressBar : MonoBehaviour
     public Text rest_time_text;
     private float rest_time;
     private GameObject[] objs;
+    private bool progressBarPaused = true; 
+    
     
      private void Awake()
     {
@@ -26,12 +29,12 @@ public class ProgressBar : MonoBehaviour
     {
         objs = GameObject.FindGameObjectsWithTag("CardPanel");
         slider.maxValue = slider_max_val = Globals.game_time_sec;
-        StartCoroutine(co);
+        // StartCoroutine(co);
     }
     
     IEnumerator ProgressCount()
     {
-        while (true)
+        while (this.progressBarPaused)
         {
             yield return new WaitForSeconds(0.1f);
             progressTime += 0.1f;

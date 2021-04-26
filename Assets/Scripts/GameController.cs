@@ -48,6 +48,10 @@ public class GameController : MonoBehaviour
     public ProgressBar progressBar;
 
     private int co_count = 0;
+
+    public Text scoreText;
+
+    private int recordScore;
     
     private void Awake()
     {
@@ -58,6 +62,10 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        recordScore = PlayerPrefs.GetInt("score");
+        scoreText = scoreText.GetComponent<Text>();
+        scoreText.text = "Best Score : " + recordScore;
+
         if (game_difficult == 1) shuffle_count = 2;
         else if (game_difficult == 2) shuffle_count = Random.Range(3,5);
         else if (game_difficult == 3) shuffle_count = Random.Range(4,6);
@@ -104,7 +112,7 @@ public class GameController : MonoBehaviour
             RectTransform rt2 = cards[rnd2].GetComponent<RectTransform>();
             Vector2 targetPos2 = cards[rnd].GetComponent<RectTransform>().localPosition;
             float step = 0;
-            float delay = 0.1f;
+            float delay = 0.3f;
             while (step < 0.5f)
             {
                 // print(step);
@@ -114,11 +122,12 @@ public class GameController : MonoBehaviour
             }    
         }
         update_card_stat_text();
-        //progressBar.StartCountTime();   
+        progressBar.StartCountTime();
         block_image_stat = true;
         co_count++;
         StopCoroutine(co);
         StartCoroutine(STEP);
+        
     }
     
     private void card_shuffle_ones(GameObject[] card)
@@ -170,10 +179,10 @@ public class GameController : MonoBehaviour
     void update_card_stat_text()
     {
         String text = "";
-        if (game_no == 1) text = "간식";
-        else if (game_no == 2) text = "꽃";
-        else if (game_no == 3) text = "모자";
-        CardStatText.text = text + "은 어디에 있을까요?";
+        if (game_no == 1) text = "간식은";
+        else if (game_no == 2) text = "꽃은";
+        else if (game_no == 3) text = "모자는";
+        CardStatText.text = text + " 어디에 있을까요?";
     }
 
     void show_car_stat_point(int per_game_point)
@@ -288,7 +297,7 @@ public class GameController : MonoBehaviour
         click_count++;
         if (click_count == click_count_max)
         {
-            // progressBar.StopCountTime();
+            progressBar.StopCountTime();
             show_car_stat_point(per_game_point);
             per_game_point = 0;
             set_card_image_alpha_all(255.0f);
@@ -306,8 +315,15 @@ public class GameController : MonoBehaviour
         set_card_image_alpha_all(255.0f);
         block_image_active(false);
         CardStatText.text = "게임이 종료되었습니다.";
+        
         StopCoroutine(co);
         StopCoroutine(STEP);
+        if (game_point > recordScore)
+        {
+            PlayerPrefs.SetInt("score", game_point);
+            scoreText.text = "Best Score : " + game_point;
+        }
+        
     }
 
     // 게임 재시작
