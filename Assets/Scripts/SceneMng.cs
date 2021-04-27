@@ -6,7 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneMng : MonoBehaviour
 {
-    
+    private void Start()
+    {
+        Screen.SetResolution(1280, 720, true);
+    }
+
     public void go_to_scene(int num)
     {
         SceneManager.LoadScene(num);

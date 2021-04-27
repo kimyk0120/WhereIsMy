@@ -1,0 +1,4 @@
+#Tue Apr 27 09:13:20 KST 2021
+base.0=/Users/youngkwangkim/unity-project/MCI_proto/Temp/gradleOut/launcher/build/intermediates/transforms/dexMerger/release/0
+path.0=classes.dex
+renamed.0=classes.dex
