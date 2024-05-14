@@ -1,4 +1,4 @@
-# whereismy
+# WhereIsMy
 
 <img src="./스크린샷 2023-02-15 오전 10.59.21.png" />
 
